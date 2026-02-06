@@ -24,19 +24,18 @@ export default function Home() {
       </Head>
 
       <div className="min-h-screen bg-[#0a0a0a] text-white font-sans">
-        {/* Oil Derrick Background - More Visible */}
+        {/* Oil Derrick Visual - Prominent in Background */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <svg className="absolute bottom-0 right-0 w-[600px] h-[500px] opacity-[0.08]" viewBox="0 0 100 75" preserveAspectRatio="none">
+          <svg className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] opacity-[0.05]" viewBox="0 0 100 75" preserveAspectRatio="none">
             <defs>
               <linearGradient id="oilGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="white" stopOpacity="0.3"/>
+                <stop offset="0%" stopColor="white" stopOpacity="0.4"/>
                 <stop offset="100%" stopColor="white" stopOpacity="0"/>
               </linearGradient>
             </defs>
-            {/* Derrick structure */}
+            {/* Derrick */}
             <path d="M35,75 L35,45 L30,45 L30,48 L25,48 L25,35 L32,35 L32,15 L35,15 L35,35 L45,35 L45,48 L40,48 L40,45 L35,45 Z" fill="url(#oilGrad)"/>
             <rect x="20" y="48" width="30" height="27" fill="url(#oilGrad)"/>
-            {/* Ground */}
             <rect x="0" y="72" width="100" height="3" fill="url(#oilGrad)"/>
           </svg>
         </div>
@@ -95,14 +94,20 @@ export default function Home() {
 
         {/* Main Content */}
         <main className={`md:transition-all md:duration-300 ${sidebarOpen ? 'md:ml-56' : 'md:ml-14'}`}>
-          <div className="pt-16 md:pt-0 max-w-5xl mx-auto px-4 md:px-8 py-8">
-            {/* Header */}
-            <header className="mb-8">
+          <div className="pt-16 md:pt-0 max-w-5xl mx-auto px-4 md:px-8 py-8 relative z-10">
+            {/* Header with Oil Visual */}
+            <header className="mb-8 text-center">
+              <div className="mb-4">
+                <svg className="w-16 h-16 mx-auto opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                  <path d="M8 21h8M8 21V9M8 9L4 5M8 9L12 5M12 5h4M12 9v12M16 9l4-4M16 9v12" strokeLinecap="round" strokeLinejoin="round"/>
+                  <rect x="6" y="15" width="12" height="6" rx="1"/>
+                </svg>
+              </div>
               <h1 className="text-2xl md:text-3xl font-semibold text-white mb-1">Carbon Cut Solutions</h1>
               <p className="text-[#666666]">Orphan well analysis and project management</p>
             </header>
 
-            {/* Stats - Full Width Grid */}
+            {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8">
               {[
                 { label: 'Active Tools', value: '4' },
@@ -117,7 +122,7 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Tools Section */}
+            {/* Tools */}
             <section className="mb-8">
               <h2 className="text-lg font-medium text-white mb-3">Tools</h2>
               <div className="space-y-2">
