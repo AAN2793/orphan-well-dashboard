@@ -113,10 +113,9 @@ export default function Home() {
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8">
               {[
-                { label: 'Active Tools', value: '4' },
-                { label: 'Cost Tiers', value: '3' },
-                { label: 'Annual Budget', value: '$640K' },
-                { label: 'Tasks', value: '8' },
+                { label: 'Low Complexity', value: '$39,124' },
+                { label: 'Typical', value: '$80,542' },
+                { label: 'High Complexity', value: '$171,718' },
               ].map((stat, idx) => (
                 <div key={idx} className="p-4 md:p-5 bg-[#111111] rounded-xl border border-[#222222]">
                   <p className="text-2xl md:text-3xl font-semibold text-white">{stat.value}</p>
