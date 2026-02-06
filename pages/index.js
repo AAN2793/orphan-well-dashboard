@@ -46,6 +46,16 @@ export default function Home() {
             </p>
           </Link>
 
+          {/* Annual Expenses */}
+          <Link href="/expenses" className="card hover:border-green-500/50 transition-all group">
+            <div className="text-4xl mb-3">💰</div>
+            <h3 className="text-xl font-semibold mb-2 group-hover:text-green-400 transition-colors">
+              Annual Expenses</h3>
+            <p className="text-slate-400 text-sm">
+              Budget overview, expense tracking, and financial planning.
+            </p>
+          </Link>
+
           {/* Placeholder - Grant Finder */}
           <div className="card opacity-60 cursor-not-allowed">
             <div className="text-4xl mb-3">💰</div>
