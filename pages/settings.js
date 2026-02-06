@@ -15,49 +15,31 @@ export default function Settings() {
         </header>
 
         <div className="card max-w-2xl">
-          <h2 className="text-xl font-semibold mb-6">Integrations</h2>
+          <h2 className="text-xl font-semibold mb-6">API Connections</h2>
           
           <div className="space-y-4">
-            <div className="flex justify-between items-center p-4 bg-slate-700/30 rounded-lg">
-              <div>
-                <p className="font-medium">GitHub</p>
-                <p className="text-sm text-slate-400">AAN2793</p>
-              </div>
-              <span className="text-green-400">✓ Connected</span>
+            <div>
+              <label className="block text-sm text-slate-400 mb-1">EPA Orphan Well API Key</label>
+              <input 
+                type="password" 
+                placeholder="Enter API key..."
+                className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white"
+              />
             </div>
 
-            <div className="flex justify-between items-center p-4 bg-slate-700/30 rounded-lg">
-              <div>
-                <p className="font-medium">Helios AI</p>
-                <p className="text-sm text-slate-400">Active</p>
-              </div>
-              <span className="text-green-400">✓ Connected</span>
+            <div>
+              <label className="block text-sm text-slate-400 mb-1">State Plugging Database</label>
+              <select className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white">
+                <option value="">Select state database...</option>
+                <option value="TX">Texas</option>
+                <option value="OK">Oklahoma</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="OH">Ohio</option>
+                <option value="WV">West Virginia</option>
+                <option value="CO">Colorado</option>
+                <option value="NM">New Mexico</option>
+              </select>
             </div>
-
-            <div className="flex justify-between items-center p-4 bg-slate-700/30 rounded-lg">
-              <div>
-                <p className="font-medium">Flight Tracking</p>
-                <p className="text-sm text-slate-400">Enabled</p>
-              </div>
-              <span className="text-green-400">✓ Active</span>
-            </div>
-          </div>
-
-          <h2 className="text-xl font-semibold mt-8 mb-6">Notifications</h2>
-          
-          <div className="space-y-4">
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input type="checkbox" defaultChecked className="w-5 h-5 rounded" />
-              <span>Flight delay alerts</span>
-            </label>
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input type="checkbox" defaultChecked className="w-5 h-5 rounded" />
-              <span>New well analysis results</span>
-            </label>
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input type="checkbox" defaultChecked className="w-5 h-5 rounded" />
-              <span>Activity log notifications</span>
-            </label>
           </div>
 
           <h2 className="text-xl font-semibold mt-8 mb-6">Business Info</h2>
@@ -79,6 +61,19 @@ export default function Settings() {
                 className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white"
               />
             </div>
+          </div>
+
+          <h2 className="text-xl font-semibold mt-8 mb-6">Notifications</h2>
+          
+          <div className="space-y-4">
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" defaultChecked className="w-5 h-5 rounded" />
+              <span>Email analysis results</span>
+            </label>
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" defaultChecked className="w-5 h-5 rounded" />
+              <span>New grant opportunities</span>
+            </label>
           </div>
         </div>
       </div>

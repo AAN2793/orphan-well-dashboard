@@ -83,40 +83,16 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Utility */}
-        <h2 className="text-2xl font-bold mb-4">🔧 Utilities</h2>
+        {/* Settings */}
+        <h2 className="text-2xl font-bold mb-4">⚙️ Configuration</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-          
-          {/* Flight Status */}
-          <Link href="/flight" className="card hover:border-blue-500/50 transition-all group">
-            <div className="text-4xl mb-3">✈️</div>
-            <h3 className="text-xl font-semibold mb-2 group-hover:text-blue-400 transition-colors">
-              Flight Tracker
-            </h3>
-            <p className="text-slate-400 text-sm">
-              Track Kos's flights for delays.
-            </p>
-          </Link>
-
-          {/* Activity Log */}
-          <Link href="/activity" className="card hover:border-purple-500/50 transition-all group">
-            <div className="text-4xl mb-3">📋</div>
-            <h3 className="text-xl font-semibold mb-2 group-hover:text-purple-400 transition-colors">
-              Activity Log
-            </h3>
-            <p className="text-slate-400 text-sm">
-              Recent activities and conversations.
-            </p>
-          </Link>
-
-          {/* Settings */}
           <Link href="/settings" className="card hover:border-slate-500/50 transition-all group">
             <div className="text-4xl mb-3">⚙️</div>
             <h3 className="text-xl font-semibold mb-2 group-hover:text-slate-400 transition-colors">
               Settings
             </h3>
             <p className="text-slate-400 text-sm">
-              Configure integrations and preferences.
+              API keys, business info, preferences.
             </p>
           </Link>
         </div>
