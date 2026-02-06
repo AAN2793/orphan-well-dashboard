@@ -5,16 +5,16 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Helios Dashboard</title>
-        <meta name="description" content="Helios AI Dashboard" />
+        <title>Carbon Cut Solutions | Orphan Well Tool</title>
+        <meta name="description" content="Orphan Well Analysis Tool for Carbon Cut Solutions" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <div className="min-h-screen p-8">
         {/* Header */}
         <header className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">🤖 Helios Dashboard</h1>
-          <p className="text-slate-400">Your AI assistant workspace</p>
+          <h1 className="text-4xl font-bold mb-2">🛢️ Carbon Cut Solutions</h1>
+          <p className="text-slate-400">Orphan Well Analysis Tool</p>
         </header>
 
         {/* Status Card */}
@@ -31,29 +31,70 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Quick Actions */}
-        <h2 className="text-2xl font-bold mb-4">Tools & Apps</h2>
+        {/* Orphan Well Tools */}
+        <h2 className="text-2xl font-bold mb-4">🛢️ Well Analysis Tools</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           
-          {/* Orphan Well Tool */}
+          {/* Primary Well Analyzer */}
           <Link href="/orphan-well" className="card hover:border-blue-500/50 transition-all group">
-            <div className="text-4xl mb-3">🛢️</div>
+            <div className="text-4xl mb-3">🔍</div>
             <h3 className="text-xl font-semibold mb-2 group-hover:text-blue-400 transition-colors">
-              Orphan Well Tool
-            </h3>
+              Well Analyzer</h3>
+            
             <p className="text-slate-400 text-sm">
-              Carbon Cut Solutions analysis tool for orphan well identification and tracking.
+              Look up orphan wells by API, state, county, or operator.
             </p>
           </Link>
 
-          {/* Market Dashboard */}
-          <Link href="/market" className="card hover:border-green-500/50 transition-all group">
-            <div className="text-4xl mb-3">📈</div>
-            <h3 className="text-xl font-semibold mb-2 group-hover:text-green-400 transition-colors">
-              Market Dashboard
+          {/* Placeholder - Grant Finder */}
+          <div className="card opacity-60 cursor-not-allowed">
+            <div className="text-4xl mb-3">💰</div>
+            <h3 className="text-xl font-semibold mb-2">Grant Finder</h3>
+            <p className="text-slate-400 text-sm">
+              Coming soon - Government grant matching
+            </p>
+          </div>
+
+          {/* Placeholder - Methane Tracker */}
+          <div className="card opacity-60 cursor-not-allowed">
+            <div className="text-4xl mb-3">🌡️</div>
+            <h3 className="text-xl font-semibold mb-2">Methane Tracker</h3>
+            <p className="text-slate-400 text-sm">
+              Coming soon - Emission monitoring
+            </p>
+          </div>
+
+          {/* Placeholder - Plugging Calculator */}
+          <div className="card opacity-60 cursor-not-allowed">
+            <div className="text-4xl mb-3">📊</div>
+            <h3 className="text-xl font-semibold mb-2">Cost Calculator</h3>
+            <p className="text-slate-400 text-sm">
+              Coming soon - Plugging cost estimates
+            </p>
+          </div>
+
+          {/* Placeholder - Compliance */}
+          <div className="card opacity-60 cursor-not-allowed">
+            <div className="text-4xl mb-3">📋</div>
+            <h3 className="text-xl font-semibold mb-2">Compliance Check</h3>
+            <p className="text-slate-400 text-sm">
+              Coming soon - Regulatory compliance
+            </p>
+          </div>
+        </div>
+
+        {/* Utility */}
+        <h2 className="text-2xl font-bold mb-4">🔧 Utilities</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          
+          {/* Flight Status */}
+          <Link href="/flight" className="card hover:border-blue-500/50 transition-all group">
+            <div className="text-4xl mb-3">✈️</div>
+            <h3 className="text-xl font-semibold mb-2 group-hover:text-blue-400 transition-colors">
+              Flight Tracker
             </h3>
             <p className="text-slate-400 text-sm">
-              Real-time market data, premarket movers, and AlertsAndNews content.
+              Track Kos's flights for delays.
             </p>
           </Link>
 
@@ -64,7 +105,7 @@ export default function Home() {
               Activity Log
             </h3>
             <p className="text-slate-400 text-sm">
-              Recent activities, tasks, and conversations with Helios.
+              Recent activities and conversations.
             </p>
           </Link>
 
@@ -75,17 +116,9 @@ export default function Home() {
               Settings
             </h3>
             <p className="text-slate-400 text-sm">
-              Configure dashboard preferences and integrations.
+              Configure integrations and preferences.
             </p>
           </Link>
-        </div>
-
-        {/* Flight Status (if active) */}
-        <div className="card">
-          <h2 className="text-xl font-semibold mb-4">✈️ Flight Status</h2>
-          <div id="flight-status">
-            <p className="text-slate-400">No active flights tracked.</p>
-          </div>
         </div>
       </div>
     </>
