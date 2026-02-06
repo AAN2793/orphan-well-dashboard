@@ -17,10 +17,11 @@ export default function WellCost() {
     { id: 'settings', name: 'Settings', href: '/settings' },
   ]
 
+  // Real bid data from PA & OH contracts
   const costTiers = {
-    low: { oil: 35000, gas: 40000 },
-    typical: { oil: 75000, gas: 85000 },
-    high: { oil: 150000, gas: 175000 }
+    low: { oil: 75000, gas: 75000, desc: 'Simple access, straightforward plug' },
+    typical: { oil: 106381, gas: 106381, desc: 'Based on Ohio 2024 avg: $106,381/well' },
+    high: { oil: 150000, gas: 150000, desc: 'Difficult access, multiple casings, environmental concerns' }
   }
 
   const getCost = () => {
@@ -31,7 +32,7 @@ export default function WellCost() {
     <>
       <Head>
         <title>Well Cost Calculator | Carbon Cut Solutions</title>
-        <meta name="description" content="Cost estimates by complexity level" />
+        <meta name="description" content="Cost estimates based on real contract bids" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
@@ -101,8 +102,27 @@ export default function WellCost() {
           <div className="pt-16 md:pt-0 max-w-5xl mx-auto px-4 md:px-8 py-8">
             <header className="mb-8">
               <h1 className="text-2xl md:text-3xl font-semibold text-white mb-1">Well Cost Calculator</h1>
-              <p className="text-[#666666]">Cost estimates by complexity level</p>
+              <p className="text-[#666666]">Based on real PA & OH contract bids</p>
             </header>
+
+            {/* Real Data Reference */}
+            <section className="mb-6">
+              <div className="p-4 bg-[#111111] border border-[#222222] rounded-xl">
+                <h3 className="text-white font-medium mb-2">Real Contract Data</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-3 bg-[#0d0d0d] rounded-lg">
+                    <p className="text-[#666666] text-sm">Pennsylvania Avg</p>
+                    <p className="text-white font-semibold">$110,132/well</p>
+                    <p className="text-[#555555] text-xs">227 wells (2022-2024)</p>
+                  </div>
+                  <div className="p-3 bg-[#0d0d0d] rounded-lg">
+                    <p className="text-[#666666] text-sm">Ohio Avg</p>
+                    <p className="text-white font-semibold">$106,381/well</p>
+                    <p className="text-[#555555] text-xs">346 wells (2024)</p>
+                  </div>
+                </div>
+              </div>
+            </section>
 
             {/* Calculator */}
             <section className="mb-8">
@@ -131,9 +151,9 @@ export default function WellCost() {
                   <h2 className="text-lg font-medium text-white mb-4">Complexity</h2>
                   <div className="space-y-2">
                     {[
-                      { id: 'low', name: 'Low Complexity', desc: 'Simple access, straightforward plug' },
-                      { id: 'typical', name: 'Typical', desc: 'Standard orphan well scenario' },
-                      { id: 'high', name: 'High Complexity', desc: 'Difficult access, multiple casings' },
+                      { id: 'low', name: 'Low Complexity', desc: costTiers.low.desc },
+                      { id: 'typical', name: 'Typical', desc: costTiers.typical.desc },
+                      { id: 'high', name: 'High Complexity', desc: costTiers.high.desc },
                     ].map((level) => (
                       <button
                         key={level.id}
@@ -152,7 +172,7 @@ export default function WellCost() {
             {/* Cost Display */}
             <section className="mb-8">
               <div className="p-6 bg-[#111111] border border-[#222222] rounded-xl text-center">
-                <p className="text-[#666666] mb-2">Estimated Cost</p>
+                <p className="text-[#666666] mb-2">Estimated Cost Per Well</p>
                 <p className="text-4xl md:text-5xl font-semibold text-white">${getCost().toLocaleString()}</p>
               </div>
             </section>
@@ -166,8 +186,7 @@ export default function WellCost() {
                   return (
                     <div key={tier} className="p-4 bg-[#111111] border border-[#222222] rounded-xl">
                       <p className="text-white font-medium mb-2">{tier} Complexity</p>
-                      <p className="text-[#666666]">Oil: ${costTiers[tierKey].oil.toLocaleString()}</p>
-                      <p className="text-[#666666]">Gas: ${costTiers[tierKey].gas.toLocaleString()}</p>
+                      <p className="text-[#666666]">${costTiers[tierKey].oil.toLocaleString()}/well</p>
                     </div>
                   )
                 })}

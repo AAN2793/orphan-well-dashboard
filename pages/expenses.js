@@ -16,15 +16,101 @@ export default function Expenses() {
   ]
 
   const expenses = [
-    { category: 'Labor', amount: 320000 },
-    { category: 'Equipment', amount: 125000 },
-    { category: 'Transportation', amount: 85000 },
-    { category: 'Materials', amount: 75000 },
-    { category: 'Permits & Compliance', amount: 25000 },
-    { category: 'Insurance', amount: 10685 },
+    { category: 'Banking & Financial', subcategory: 'Bank Fees', amount: 180 },
+    { category: 'Banking & Financial', subcategory: 'Wire Fees', amount: 100 },
+    { category: 'Vehicles & Equipment', subcategory: 'Truck Payments', amount: 14400 },
+    { category: 'Vehicles & Equipment', subcategory: 'Fuel', amount: 3750 },
+    { category: 'Vehicles & Equipment', subcategory: 'Vehicle Insurance', amount: 2000 },
+    { category: 'Vehicles & Equipment', subcategory: 'Vehicle Repairs & Maintenance', amount: 5000 },
+    { category: 'Vehicles & Equipment', subcategory: 'Registration & Licensing', amount: 250 },
+    { category: 'Vehicles & Equipment', subcategory: 'Equipment Rental', amount: 10000 },
+    { category: 'Vehicles & Equipment', subcategory: 'Equipment Maintenance', amount: 2000 },
+    { category: 'Labor & Contractors', subcategory: 'W-2 Wages', amount: 160000 },
+    { category: 'Labor & Contractors', subcategory: 'Payroll Taxes', amount: 36000 },
+    { category: 'Labor & Contractors', subcategory: 'Employee Benefits', amount: 36000 },
+    { category: 'Labor & Contractors', subcategory: '1099 Contractors', amount: 120000 },
+    { category: 'Labor & Contractors', subcategory: 'Consulting Fees', amount: 100000 },
+    { category: 'Insurance', subcategory: 'General Liability', amount: 1000 },
+    { category: 'Insurance', subcategory: 'Workers Compensation', amount: 4000 },
+    { category: 'Insurance', subcategory: 'Commercial Auto', amount: 2000 },
+    { category: 'Insurance', subcategory: 'Umbrella / Excess Liability', amount: 500 },
+    { category: 'Insurance', subcategory: 'Professional Liability (E&O)', amount: 1000 },
+    { category: 'Interest & Financing', subcategory: 'Loan Interest', amount: 5000 },
+    { category: 'Interest & Financing', subcategory: 'Equipment Financing Interest', amount: 5000 },
+    { category: 'Job / Project Supplies', subcategory: 'Materials', amount: 1000 },
+    { category: 'Job / Project Supplies', subcategory: 'Consumables', amount: 1000 },
+    { category: 'Job / Project Supplies', subcategory: 'Safety Supplies', amount: 0 },
+    { category: 'Job / Project Supplies', subcategory: 'PPE', amount: 300 },
+    { category: 'Job / Project Supplies', subcategory: 'Disposal Fees', amount: 250 },
+    { category: 'Legal & Professional Services', subcategory: 'Legal Fees', amount: 5000 },
+    { category: 'Legal & Professional Services', subcategory: 'Accounting / CPA', amount: 1000 },
+    { category: 'Legal & Professional Services', subcategory: 'Bookkeeping', amount: 1200 },
+    { category: 'Legal & Professional Services', subcategory: 'Advisory Services', amount: 0 },
+    { category: 'Meals & Entertainment', subcategory: 'Business Meals', amount: 5000 },
+    { category: 'Meals & Entertainment', subcategory: 'Client Meals', amount: 1000 },
+    { category: 'Meals & Entertainment', subcategory: 'Team Meals', amount: 1000 },
+    { category: 'Office & Administrative', subcategory: 'Office Supplies', amount: 200 },
+    { category: 'Office & Administrative', subcategory: 'Printing', amount: 200 },
+    { category: 'Office & Administrative', subcategory: 'Postage', amount: 100 },
+    { category: 'Office & Administrative', subcategory: 'Small Office Equipment', amount: 3000 },
+    { category: 'Software & Technology', subcategory: 'Software Subscriptions', amount: 1800 },
+    { category: 'Software & Technology', subcategory: 'Cloud Services', amount: 180 },
+    { category: 'Software & Technology', subcategory: 'Data Services', amount: 800 },
+    { category: 'Software & Technology', subcategory: 'Accounting Software', amount: 300 },
+    { category: 'Software & Technology', subcategory: 'Project Management Tools', amount: 0 },
+    { category: 'Other Business Expenses', subcategory: 'Miscellaneous Operating Expenses', amount: 10000 },
+    { category: 'Other Business Expenses', subcategory: 'Small Tools (Non-Capitalized)', amount: 1000 },
+    { category: 'Fees', subcategory: 'Permit Fees', amount: 0 },
+    { category: 'Fees', subcategory: 'Filing Fees', amount: 5000 },
+    { category: 'Fees', subcategory: 'Application Fees', amount: 1000 },
+    { category: 'Fees', subcategory: 'Government Fees', amount: 0 },
+    { category: 'Reimbursable Expenses', subcategory: 'Employee Reimbursements', amount: 20000 },
+    { category: 'Reimbursable Expenses', subcategory: 'Partner Reimbursements', amount: 20000 },
+    { category: 'Rent & Lease', subcategory: 'Office Rent', amount: 0 },
+    { category: 'Rent & Lease', subcategory: 'Yard / Storage Lease', amount: 6000 },
+    { category: 'Rent & Lease', subcategory: 'Equipment Leases', amount: 0 },
+    { category: 'Rent & Lease', subcategory: 'Temporary Site Rentals', amount: 0 },
+    { category: 'Repairs & Maintenance', subcategory: 'Facility Maintenance', amount: 0 },
+    { category: 'Repairs & Maintenance', subcategory: 'Equipment Repairs', amount: 0 },
+    { category: 'Repairs & Maintenance', subcategory: 'Grounds Maintenance', amount: 0 },
+    { category: 'Software Development', subcategory: 'App Development', amount: 0 },
+    { category: 'Software Development', subcategory: 'Contract Developers', amount: 0 },
+    { category: 'Software Development', subcategory: 'API Usage Fees', amount: 0 },
+    { category: 'Software Development', subcategory: 'Hosting', amount: 0 },
+    { category: 'Taxes & Licensing', subcategory: 'State Taxes', amount: 0 },
+    { category: 'Taxes & Licensing', subcategory: 'Local Taxes', amount: 0 },
+    { category: 'Taxes & Licensing', subcategory: 'Business Licenses', amount: 0 },
+    { category: 'Taxes & Licensing', subcategory: 'Franchise Taxes', amount: 0 },
+    { category: 'Taxes & Licensing', subcategory: 'Annual Filings', amount: 1000 },
+    { category: 'Travel', subcategory: 'Hotels', amount: 10000 },
+    { category: 'Travel', subcategory: 'Airfare', amount: 5000 },
+    { category: 'Travel', subcategory: 'Rental Cars', amount: 5000 },
+    { category: 'Travel', subcategory: 'Mileage', amount: 10000 },
+    { category: 'Travel', subcategory: 'Per Diem', amount: 2250 },
+    { category: 'Utilities', subcategory: 'Electricity', amount: 0 },
+    { category: 'Utilities', subcategory: 'Water', amount: 0 },
+    { category: 'Utilities', subcategory: 'Internet', amount: 225 },
+    { category: 'Utilities', subcategory: 'Phone / Mobile', amount: 216 },
+    { category: 'Utilities', subcategory: 'Data Plans', amount: 0 },
+    { category: 'Marketing & Business Development', subcategory: 'Advertising', amount: 0 },
+    { category: 'Marketing & Business Development', subcategory: 'Website Hosting', amount: 200 },
+    { category: 'Marketing & Business Development', subcategory: 'Branding & Design', amount: 600 },
+    { category: 'Marketing & Business Development', subcategory: 'Sponsorships', amount: 1000 },
+    { category: 'Marketing & Business Development', subcategory: 'Client Outreach', amount: 0 },
+    { category: 'Compliance & Safety', subcategory: 'Environmental Compliance', amount: 10000 },
+    { category: 'Compliance & Safety', subcategory: 'Safety Training', amount: 2000 },
+    { category: 'Compliance & Safety', subcategory: 'Inspections', amount: 500 },
+    { category: 'Compliance & Safety', subcategory: 'Monitoring Services', amount: 1000 },
   ]
 
   const total = expenses.reduce((sum, e) => sum + e.amount, 0)
+
+  // Group by category
+  const categories = {}
+  expenses.forEach(e => {
+    if (!categories[e.category]) categories[e.category] = 0
+    categories[e.category] += e.amount
+  })
 
   return (
     <>
@@ -100,7 +186,7 @@ export default function Expenses() {
           <div className="pt-16 md:pt-0 max-w-5xl mx-auto px-4 md:px-8 py-8">
             <header className="mb-8">
               <h1 className="text-2xl md:text-3xl font-semibold text-white mb-1">Annual Expenses</h1>
-              <p className="text-[#666666]">Budget overview and expense tracking</p>
+              <p className="text-[#666666]">Detailed budget breakdown</p>
             </header>
 
             {/* Total */}
@@ -111,13 +197,29 @@ export default function Expenses() {
               </div>
             </section>
 
-            {/* Expense List */}
+            {/* Category Summary */}
             <section className="mb-8">
-              <h2 className="text-lg font-medium text-white mb-3">Expenses by Category</h2>
-              <div className="space-y-2">
-                {expenses.map((expense, idx) => (
-                  <div key={idx} className="flex items-center justify-between p-4 bg-[#111111] border border-[#222222] rounded-xl">
-                    <p className="text-white">{expense.category}</p>
+              <h2 className="text-lg font-medium text-white mb-3">By Category</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                {Object.entries(categories).map(([cat, amount]) => (
+                  <div key={cat} className="p-3 bg-[#111111] border border-[#222222] rounded-xl">
+                    <p className="text-[#666666] text-xs">{cat}</p>
+                    <p className="text-white font-semibold">${amount.toLocaleString()}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Full Expense List */}
+            <section className="mb-8">
+              <h2 className="text-lg font-medium text-white mb-3">All Expenses</h2>
+              <div className="space-y-1">
+                {expenses.filter(e => e.amount > 0).map((expense, idx) => (
+                  <div key={idx} className="flex items-center justify-between p-3 bg-[#111111] border border-[#222222] rounded-lg">
+                    <div>
+                      <p className="text-white text-sm">{expense.subcategory}</p>
+                      <p className="text-[#555555] text-xs">{expense.category}</p>
+                    </div>
                     <p className="text-[#888888]">${expense.amount.toLocaleString()}</p>
                   </div>
                 ))}
