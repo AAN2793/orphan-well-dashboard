@@ -3,205 +3,142 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 export default function Home() {
-  const [dropdown, setDropdown] = useState(null)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activePage, setActivePage] = useState('dashboard')
+  const [sidebarOpen, setSidebarOpen] = useState(true)
 
-  const navItems = {
-    'Tools': [
-      { name: 'Well Analyzer', href: '/orphan-well', desc: 'Look up orphan wells' },
-      { name: 'Well Cost Calculator', href: '/well-cost', desc: 'Cost estimates by complexity' },
-      { name: 'Annual Expenses', href: '/expenses', desc: 'Budget & expense tracking' },
-    ],
-    'Planning': [
-      { name: 'To-Do List', href: '/todo', desc: 'Task management' },
-      { name: 'Project Templates', href: '/templates', desc: 'Coming soon' },
-      { name: 'Cost Analysis', href: '/analysis', desc: 'Coming soon' },
-    ],
-    'Resources': [
-      { name: 'Documents', href: '/documents', desc: 'Coming soon' },
-      { name: 'External Links', href: '/links', desc: 'Coming soon' },
-    ],
-  }
-
-  const quickLinks = [
-    { name: 'Well Analyzer', href: '/orphan-well', category: 'tools' },
-    { name: 'Well Cost Calculator', href: '/well-cost', category: 'tools' },
-    { name: 'Annual Expenses', href: '/expenses', category: 'tools' },
-    { name: 'To-Do List', href: '/todo', category: 'planning' },
-    { name: 'Settings', href: '/settings', category: 'settings' },
+  const navItems = [
+    { id: 'dashboard', name: 'Dashboard', href: '/' },
+    { id: 'analyzer', name: 'Well Analyzer', href: '/orphan-well' },
+    { id: 'cost', name: 'Well Cost Calculator', href: '/well-cost' },
+    { id: 'expenses', name: 'Annual Expenses', href: '/expenses' },
+    { id: 'todo', name: 'To-Do List', href: '/todo' },
+    { id: 'settings', name: 'Settings', href: '/settings' },
   ]
 
   return (
     <>
       <Head>
-        <title>Carbon Cut Solutions | Orphan Well Tool</title>
+        <title>Carbon Cut Solutions</title>
         <meta name="description" content="Orphan Well Analysis Tool" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="min-h-screen bg-slate-900">
-        {/* Mobile Header */}
-        <div className="md:hidden bg-gradient-to-r from-slate-800 to-slate-700 p-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-xl">🛢️</span>
-            <span className="font-bold">Carbon Cut</span>
-          </div>
-          <button 
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-white p-2"
-          >
-            {mobileMenuOpen ? '✕' : '☰'}
-          </button>
+      <div className="min-h-screen bg-[#0a0a0a] text-white font-sans">
+        {/* Subtle oil derrick silhouette background */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <svg className="absolute bottom-0 right-0 w-[800px] h-[600px] opacity-[0.03]" viewBox="0 0 100 75" preserveAspectRatio="none">
+            <path d="M30,75 L30,40 L25,40 L25,45 L20,45 L20,35 L28,35 L28,20 L32,20 L32,35 L40,35 L40,45 L35,45 L35,40 L30,40 Z" fill="white"/>
+            <rect x="15" y="45" width="30" height="30" fill="white" opacity="0.5"/>
+            <path d="M0,75 L100,75 L100,70 L0,70 Z" fill="white" opacity="0.1"/>
+          </svg>
         </div>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-slate-800 border-b border-slate-700 p-4 space-y-2">
-            {Object.entries(navItems).map(([label, items]) => (
-              <div key={label}>
-                <div className="text-slate-400 text-sm mb-1">{label}</div>
-                {items.map((item, idx) => (
+        {/* Sidebar */}
+        <aside className={`fixed left-0 top-0 h-full bg-[#111111] border-r border-[#222222] transition-all duration-300 z-50 ${sidebarOpen ? 'w-64' : 'w-16'}`}>
+          {/* Logo */}
+          <div className="h-16 flex items-center px-4 border-b border-[#222222]">
+            <span className="text-2xl">🛢️</span>
+            {sidebarOpen && <span className="ml-3 font-semibold text-lg">Carbon Cut</span>}
+          </div>
+
+          {/* Nav */}
+          <nav className="p-2 space-y-1">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={item.href}
+                className={`flex items-center px-3 py-2.5 rounded-lg text-sm transition-all duration-200 ${
+                  activePage === item.id 
+                    ? 'bg-[#1a1a1a] text-white' 
+                    : 'text-[#888888] hover:text-white hover:bg-[#1a1a1a]'
+                }`}
+              >
+                <span className="text-lg w-6">{item.id === 'dashboard' ? '◎' : item.id === 'analyzer' ? '◎' : item.id === 'cost' ? '◎' : item.id === 'expenses' ? '◎' : item.id === 'todo' ? '◎' : '◎'}</span>
+                {sidebarOpen && <span className="ml-3">{item.name}</span>}
+              </a>
+            ))}
+          </nav>
+
+          {/* Toggle */}
+          <button 
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="absolute bottom-4 right-4 w-8 h-8 bg-[#1a1a1a] rounded-lg flex items-center justify-center text-[#666666] hover:text-white transition-colors"
+          >
+            {sidebarOpen ? '◀' : '▶'}
+          </button>
+        </aside>
+
+        {/* Main Content */}
+        <main className={`transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-16'}`}>
+          <div className="max-w-4xl mx-auto px-8 py-12">
+            {/* Header */}
+            <header className="mb-12">
+              <h1 className="text-3xl font-semibold text-white mb-2">Carbon Cut Solutions</h1>
+              <p className="text-[#666666]">Orphan well analysis and project management</p>
+            </header>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-4 gap-4 mb-12">
+              {[
+                { label: 'Active Tools', value: '4' },
+                { label: 'Cost Tiers', value: '3' },
+                { label: 'Annual Budget', value: '$640K' },
+                { label: 'Tasks', value: '8' },
+              ].map((stat, idx) => (
+                <div key={idx} className="p-4">
+                  <p className="text-2xl font-semibold text-white mb-1">{stat.value}</p>
+                  <p className="text-sm text-[#666666]">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Section */}
+            <section className="mb-10">
+              <h2 className="text-lg font-medium text-white mb-4">Tools</h2>
+              <div className="space-y-2">
+                {[
+                  { name: 'Well Analyzer', desc: 'Look up orphan wells by API, state, county', href: '/orphan-well' },
+                  { name: 'Well Cost Calculator', desc: 'Cost estimates by complexity level', href: '/well-cost' },
+                  { name: 'Annual Expenses', desc: 'Budget overview and expense tracking', href: '/expenses' },
+                  { name: 'To-Do List', desc: 'Task management and project planning', href: '/todo' },
+                ].map((tool, idx) => (
                   <a
                     key={idx}
-                    href={item.href}
-                    className="block py-2 px-2 text-white bg-slate-700 rounded mb-1"
+                    href={tool.href}
+                    className="flex items-center justify-between p-4 rounded-lg bg-[#111111] border border-[#222222] hover:border-[#333333] transition-all group"
                   >
-                    {item.name}
+                    <div>
+                      <p className="text-white group-hover:text-blue-300 transition-colors">{tool.name}</p>
+                      <p className="text-sm text-[#666666]">{tool.desc}</p>
+                    </div>
+                    <span className="text-[#444444] group-hover:text-white transition-colors">→</span>
                   </a>
                 ))}
               </div>
-            ))}
-            <a href="/settings" className="block py-2 px-2 text-white bg-slate-700 rounded">
-              Settings
-            </a>
-          </div>
-        )}
+            </section>
 
-        {/* Desktop Navbar */}
-        <nav className="hidden md:block bg-gradient-to-r from-slate-800 to-slate-700 border-b border-slate-600 sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex items-center justify-between h-16">
-              <div className="flex items-center gap-3">
-                <span className="text-2xl">🛢️</span>
-                <div>
-                  <span className="font-bold text-lg">Carbon Cut Solutions</span>
-                  <p className="text-xs text-slate-400">Orphan Well Analysis Tool</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-1">
-                {Object.entries(navItems).map(([label, items]) => (
-                  <div 
-                    key={label}
-                    className="relative"
-                    onMouseEnter={() => setDropdown(label)}
-                    onMouseLeave={() => setDropdown(null)}
+            {/* Coming Soon */}
+            <section className="mb-10">
+              <h2 className="text-lg font-medium text-white mb-4">Coming Soon</h2>
+              <div className="space-y-2">
+                {['Project Templates', 'Cost Analysis', 'Documents'].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center justify-between p-4 rounded-lg bg-[#0a0a0a] border border-[#1a1a1a]"
                   >
-                    <button className="px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-600/50 rounded-lg transition-all text-sm">
-                      {label} ▾
-                    </button>
-                    {dropdown === label && (
-                      <div className="absolute top-full right-0 mt-1 w-56 bg-slate-800 border border-slate-600 rounded-lg shadow-xl py-2 z-50">
-                        {items.map((item, idx) => (
-                          <a key={idx} href={item.href} className="block px-4 py-2 hover:bg-slate-700">
-                            <div className="text-white text-sm">{item.name}</div>
-                            <div className="text-slate-400 text-xs">{item.desc}</div>
-                          </a>
-                        ))}
-                      </div>
-                    )}
+                    <p className="text-[#555555]">{item}</p>
                   </div>
                 ))}
               </div>
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                  <span className="text-slate-400 text-sm">Online</span>
-                </div>
+            </section>
+
+            {/* Footer */}
+            <footer className="pt-8 border-t border-[#222222]">
+              <div className="flex items-center justify-between text-sm text-[#444444]">
+                <span>Carbon Cut Solutions</span>
+                <a href="/settings" className="hover:text-white transition-colors">Settings</a>
               </div>
-            </div>
-          </div>
-        </nav>
-
-        {/* Hero Section */}
-        <div className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-slate-900 to-slate-900"></div>
-          <div className="relative max-w-7xl mx-auto px-4 md:p-8 pt-12 pb-16 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-              Carbon Cut Solutions
-            </h1>
-            <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">
-              Orphan well analysis, cost estimation, and project management for environmental remediation.
-            </p>
-          </div>
-        </div>
-
-        {/* Main Content */}
-        <main className="max-w-7xl mx-auto px-4 pb-16">
-          {/* Quick Links Section */}
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-6 text-white">Quick Access</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {quickLinks.map((link, idx) => (
-                <a
-                  key={idx}
-                  href={link.href}
-                  className="group relative overflow-hidden bg-gradient-to-br from-slate-800 to-slate-700 rounded-2xl p-6 hover:from-slate-700 hover:to-slate-600 transition-all duration-300 border border-slate-600/50 hover:border-blue-500/50"
-                >
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-transparent rounded-full -mr-16 -mt-16 transform group-hover:scale-150 transition-transform duration-500"></div>
-                  <div className="relative">
-                    <span className="text-lg font-semibold text-white group-hover:text-blue-300 transition-colors">
-                      {link.name} →
-                    </span>
-                    <p className="text-sm text-slate-400 mt-1 capitalize">{link.category}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Coming Soon Section */}
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-6 text-white">Coming Soon</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {[
-                'Project Templates',
-                'Cost Analysis', 
-                'Documents'
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50"
-                >
-                  <span className="text-slate-400">{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Stats Footer */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-2xl p-6 text-center border border-blue-700/30">
-              <p className="text-3xl font-bold text-blue-400">3</p>
-              <p className="text-sm text-slate-400">Active Tools</p>
-            </div>
-            <div className="bg-gradient-to-br from-green-900/30 to-green-800/20 rounded-2xl p-6 text-center border border-green-700/30">
-              <p className="text-3xl font-bold text-green-400">$640K</p>
-              <p className="text-sm text-slate-400">Annual Budget</p>
-            </div>
-            <div className="bg-gradient-to-br from-purple-900/30 to-purple-800/20 rounded-2xl p-6 text-center border border-purple-700/30">
-              <p className="text-3xl font-bold text-purple-400">3</p>
-              <p className="text-sm text-slate-400">Cost Tiers</p>
-            </div>
-            <div className="bg-gradient-to-br from-yellow-900/30 to-yellow-800/20 rounded-2xl p-6 text-center border border-yellow-700/30">
-              <p className="text-3xl font-bold text-yellow-400">1</p>
-              <p className="text-sm text-slate-400">Active Projects</p>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="mt-12 flex justify-between items-center text-sm text-slate-500">
-            <span>Carbon Cut Solutions</span>
-            <a href="/settings" className="hover:text-white transition-colors">Settings →</a>
+            </footer>
           </div>
         </main>
       </div>
