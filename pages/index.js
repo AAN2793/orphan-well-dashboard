@@ -74,12 +74,22 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Placeholder - Plugging Calculator */}
-          <div className="card opacity-60 cursor-not-allowed">
-            <div className="text-4xl mb-3">📊</div>
-            <h3 className="text-xl font-semibold mb-2">Cost Calculator</h3>
+          {/* Well Cost Calculator */}
+          <Link href="/well-cost" className="card hover:border-yellow-500/50 transition-all group">
+            <div className="text-4xl mb-3">🏗️</div>
+            <h3 className="text-xl font-semibold mb-2 group-hover:text-yellow-400 transition-colors">
+              Well Cost Calculator</h3>
             <p className="text-slate-400 text-sm">
-              Coming soon - Plugging cost estimates
+              Low, Typical, and High complexity cost estimates.
+            </p>
+          </Link>
+
+          {/* Placeholder - Methane Tracker */}
+          <div className="card opacity-60 cursor-not-allowed">
+            <div className="text-4xl mb-3">🌡️</div>
+            <h3 className="text-xl font-semibold mb-2">Methane Tracker</h3>
+            <p className="text-slate-400 text-sm">
+              Coming soon - Emission monitoring
             </p>
           </div>
 
