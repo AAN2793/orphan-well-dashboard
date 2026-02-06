@@ -24,25 +24,34 @@ export default function Home() {
       </Head>
 
       <div className="min-h-screen bg-[#0a0a0a] text-white font-sans">
-        {/* Oil Derrick Visual - Prominent in Background */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <svg className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] opacity-[0.05]" viewBox="0 0 100 75" preserveAspectRatio="none">
+        {/* Large Oil Derrick Background - Static and Prominent */}
+        <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-0">
+          <svg className="w-full h-full max-w-4xl max-h-[800px] opacity-[0.08] absolute" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet">
             <defs>
               <linearGradient id="oilGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="white" stopOpacity="0.4"/>
+                <stop offset="0%" stopColor="white" stopOpacity="0.6"/>
                 <stop offset="100%" stopColor="white" stopOpacity="0"/>
               </linearGradient>
             </defs>
-            {/* Derrick */}
-            <path d="M35,75 L35,45 L30,45 L30,48 L25,48 L25,35 L32,35 L32,15 L35,15 L35,35 L45,35 L45,48 L40,48 L40,45 L35,45 Z" fill="url(#oilGrad)"/>
-            <rect x="20" y="48" width="30" height="27" fill="url(#oilGrad)"/>
-            <rect x="0" y="72" width="100" height="3" fill="url(#oilGrad)"/>
+            {/* Derrick Tower */}
+            <g transform="translate(100, 75)">
+              {/* Main tower legs */}
+              <path d="M-8,60 L-4,10 L-2,10 L-2,0 L2,0 L2,10 L4,10 L8,60 Z" fill="url(#oilGrad)"/>
+              {/* Platform */}
+              <rect x="-15" y="-8" width="30" height="6" rx="1" fill="url(#oilGrad)"/>
+              {/* Cross braces */}
+              <line x1="-4" y1="30" x2="4" y2="30" stroke="url(#oilGrad)" strokeWidth="1"/>
+              <line x1="-6" y1="45" x2="6" y2="45" stroke="url(#oilGrad)" strokeWidth="1"/>
+              <line x1="-4" y1="20" x2="4" y2="20" stroke="url(#oilGrad)" strokeWidth="1"/>
+              {/* Base */}
+              <rect x="-20" y="60" width="40" height="10" rx="2" fill="url(#oilGrad)"/>
+            </g>
           </svg>
         </div>
 
         {/* Mobile Header */}
         <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-[#111111] border-b border-[#222222] flex items-center justify-between px-4 z-50">
-          <span className="text-lg">🛢️ Carbon Cut</span>
+          <span className="text-lg">Carbon Cut</span>
           <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-white">
             {mobileMenuOpen ? '✕' : '☰'}
           </button>
@@ -93,16 +102,10 @@ export default function Home() {
         </aside>
 
         {/* Main Content */}
-        <main className={`md:transition-all md:duration-300 ${sidebarOpen ? 'md:ml-56' : 'md:ml-14'}`}>
-          <div className="pt-16 md:pt-0 max-w-5xl mx-auto px-4 md:px-8 py-8 relative z-10">
-            {/* Header with Oil Visual */}
+        <main className={`md:transition-all md:duration-300 relative z-10 ${sidebarOpen ? 'md:ml-56' : 'md:ml-14'}`}>
+          <div className="pt-16 md:pt-0 max-w-5xl mx-auto px-4 md:px-8 py-8">
+            {/* Header */}
             <header className="mb-8 text-center">
-              <div className="mb-4">
-                <svg className="w-16 h-16 mx-auto opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                  <path d="M8 21h8M8 21V9M8 9L4 5M8 9L12 5M12 5h4M12 9v12M16 9l4-4M16 9v12" strokeLinecap="round" strokeLinejoin="round"/>
-                  <rect x="6" y="15" width="12" height="6" rx="1"/>
-                </svg>
-              </div>
               <h1 className="text-2xl md:text-3xl font-semibold text-white mb-1">Carbon Cut Solutions</h1>
               <p className="text-[#666666]">Orphan well analysis and project management</p>
             </header>
