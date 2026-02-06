@@ -1,159 +1,152 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState } from 'react'
 
-export default function OrphanWell() {
-  const [wellData, setWellData] = useState({
-    location: '',
-    state: '',
-    county: '',
-    apiNumber: '',
-    operator: '',
-    status: 'active'
-  })
-  const [results, setResults] = useState([])
-  const [loading, setLoading] = useState(false)
+export default function WellAnalyzer() {
+  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [searchParams, setSearchParams] = useState({ api: '', state: '', county: '' })
 
-  const analyzeWell = () => {
-    setLoading(true)
-    // Simulated analysis - replace with actual API calls
-    setTimeout(() => {
-      setResults([
-        { metric: 'Methane Risk Score', value: 'High', color: 'red' },
-        { metric: 'Plugging Cost Estimate', value: '$45,000-$80,000', color: 'yellow' },
-        { metric: 'Government Grant Eligibility', value: 'Eligible', color: 'green' },
-        { metric: 'Environmental Impact', value: 'Significant', color: 'red' },
-      ])
-      setLoading(false)
-    }, 1500)
+  const navItems = [
+    { id: 'dashboard', name: 'Dashboard', href: '/' },
+    { id: 'analyzer', name: 'Well Analyzer', href: '/orphan-well' },
+    { id: 'cost', name: 'Well Cost Calculator', href: '/well-cost' },
+    { id: 'expenses', name: 'Annual Expenses', href: '/expenses' },
+    { id: 'todo', name: 'To-Do List', href: '/todo' },
+    { id: 'settings', name: 'Settings', href: '/settings' },
+  ]
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    // TODO: Implement API call
+    console.log('Search:', searchParams)
   }
 
   return (
     <>
       <Head>
-        <title>Orphan Well Tool | Helios</title>
+        <title>Well Analyzer | Carbon Cut Solutions</title>
+        <meta name="description" content="Look up orphan wells" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="min-h-screen p-8">
-        <header className="mb-8">
-          <a href="/" className="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Back to Dashboard</a>
-          <h1 className="text-4xl font-bold mb-2">🛢️ Orphan Well Analysis Tool</h1>
-          <p className="text-slate-400">Carbon Cut Solutions - Well identification and analysis</p>
-        </header>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Input Form */}
-          <div className="card">
-            <h2 className="text-xl font-semibold mb-4">Well Information</h2>
-            
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm text-slate-400 mb-1">API Number</label>
-                <input 
-                  type="text" 
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white"
-                  placeholder="Enter API number..."
-                  value={wellData.apiNumber}
-                  onChange={(e) => setWellData({...wellData, apiNumber: e.target.value})}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm text-slate-400 mb-1">State</label>
-                <select 
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white"
-                  value={wellData.state}
-                  onChange={(e) => setWellData({...wellData, state: e.target.value})}
-                >
-                  <option value="">Select State...</option>
-                  <option value="TX">Texas</option>
-                  <option value="OK">Oklahoma</option>
-                  <option value="PA">Pennsylvania</option>
-                  <option value="OH">Ohio</option>
-                  <option value="WV">West Virginia</option>
-                  <option value="CO">Colorado</option>
-                  <option value="NM">New Mexico</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm text-slate-400 mb-1">County</label>
-                <input 
-                  type="text" 
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white"
-                  placeholder="Enter county..."
-                  value={wellData.county}
-                  onChange={(e) => setWellData({...wellData, county: e.target.value})}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm text-slate-400 mb-1">Operator Name</label>
-                <input 
-                  type="text" 
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white"
-                  placeholder="Enter operator..."
-                  value={wellData.operator}
-                  onChange={(e) => setWellData({...wellData, operator: e.target.value})}
-                />
-              </div>
-
-              <button 
-                onClick={analyzeWell}
-                disabled={loading}
-                className="btn btn-primary w-full mt-4 disabled:opacity-50"
-              >
-                {loading ? 'Analyzing...' : 'Analyze Well'}
-              </button>
-            </div>
-          </div>
-
-          {/* Results */}
-          <div className="card">
-            <h2 className="text-xl font-semibold mb-4">Analysis Results</h2>
-            
-            {results.length === 0 ? (
-              <p className="text-slate-400">Enter well data and click analyze to see results.</p>
-            ) : (
-              <div className="space-y-3">
-                {results.map((result, idx) => (
-                  <div key={idx} className="flex justify-between items-center p-3 bg-slate-700/50 rounded-lg">
-                    <span className="text-slate-300">{result.metric}</span>
-                    <span className={`font-semibold ${
-                      result.color === 'green' ? 'text-green-400' :
-                      result.color === 'yellow' ? 'text-yellow-400' :
-                      'text-red-400'
-                    }`}>
-                      {result.value}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+      <div className="min-h-screen bg-[#0a0a0a] text-white font-sans">
+        {/* Oil Derrick Background */}
+        <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-0">
+          <svg className="w-full h-full max-w-4xl max-h-[800px] opacity-[0.08] absolute" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="oilGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="white" stopOpacity="0.6"/>
+                <stop offset="100%" stopColor="white" stopOpacity="0"/>
+              </linearGradient>
+            </defs>
+            <g transform="translate(100, 75)">
+              <path d="M-8,60 L-4,10 L-2,10 L-2,0 L2,0 L2,10 L4,10 L8,60 Z" fill="url(#oilGrad)"/>
+              <rect x="-15" y="-8" width="30" height="6" rx="1" fill="url(#oilGrad)"/>
+              <line x1="-4" y1="30" x2="4" y2="30" stroke="url(#oilGrad)" strokeWidth="1"/>
+              <line x1="-6" y1="45" x2="6" y2="45" stroke="url(#oilGrad)" strokeWidth="1"/>
+              <line x1="-4" y1="20" x2="4" y2="20" stroke="url(#oilGrad)" strokeWidth="1"/>
+              <rect x="-20" y="60" width="40" height="10" rx="2" fill="url(#oilGrad)"/>
+            </g>
+          </svg>
         </div>
 
-        {/* Data Sources */}
-        <div className="card mt-8">
-          <h2 className="text-xl font-semibold mb-4">📊 Data Sources</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-            <div className="p-3 bg-slate-700/30 rounded-lg">
-              <p className="text-slate-400">EPA Orphan Well Database</p>
-              <p className="text-green-400">Connected</p>
-            </div>
-            <div className="p-3 bg-slate-700/30 rounded-lg">
-              <p className="text-slate-400">State Plugging Reports</p>
-              <p className="text-green-400">Connected</p>
-            </div>
-            <div className="p-3 bg-slate-700/30 rounded-lg">
-              <p className="text-slate-400">Methane Emission Data</p>
-              <p className="text-yellow-400">Partial</p>
-            </div>
-            <div className="p-3 bg-slate-700/30 rounded-lg">
-              <p className="text-slate-400">Grant Programs</p>
-              <p className="text-green-400">Connected</p>
-            </div>
-          </div>
+        {/* Mobile Header */}
+        <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-[#111111] border-b border-[#222222] flex items-center justify-between px-4 z-50">
+          <span className="text-lg">Carbon Cut</span>
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-white">
+            {mobileMenuOpen ? '✕' : '☰'}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden fixed inset-0 bg-[#0a0a0a] z-40 pt-14 p-4">
+            <nav className="space-y-2">
+              {navItems.map((item) => (
+                <a key={item.id} href={item.href} className="block p-4 bg-[#111111] rounded-lg text-white" onClick={() => setMobileMenuOpen(false)}>
+                  {item.name}
+                </a>
+              ))}
+            </nav>
+          </div>
+        )}
+
+        {/* Sidebar */}
+        <aside className={`hidden md:block fixed left-0 top-0 h-full bg-[#111111] border-r border-[#222222] transition-all duration-300 z-40 ${sidebarOpen ? 'w-56' : 'w-14'}`}>
+          <div className="h-14 flex items-center px-4 border-b border-[#222222]">
+            <span className="text-xl">🛢️</span>
+            {sidebarOpen && <span className="ml-2 font-medium">Carbon Cut</span>}
+          </div>
+          <nav className="p-2 space-y-1">
+            {navItems.map((item) => (
+              <a key={item.id} href={item.href} className={`flex items-center px-3 py-2.5 rounded-lg text-sm transition-all ${item.id === 'analyzer' ? 'text-white bg-[#1a1a1a]' : 'text-[#888888] hover:text-white hover:bg-[#1a1a1a]'}`}>
+                <span className="w-5">{item.id === 'analyzer' ? '●' : '○'}</span>
+                {sidebarOpen && <span className="ml-2">{item.name}</span>}
+              </a>
+            ))}
+          </nav>
+          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-[#1a1a1a] rounded text-[#666666] hover:text-white">
+            {sidebarOpen ? '◀' : '▶'}
+          </button>
+        </aside>
+
+        {/* Main Content */}
+        <main className={`md:transition-all md:duration-300 relative z-10 ${sidebarOpen ? 'md:ml-56' : 'md:ml-14'}`}>
+          <div className="pt-16 md:pt-0 max-w-5xl mx-auto px-4 md:px-8 py-8">
+            <header className="mb-8">
+              <h1 className="text-2xl md:text-3xl font-semibold text-white mb-1">Well Analyzer</h1>
+              <p className="text-[#666666]">Look up orphan wells by API, state, county</p>
+            </header>
+
+            {/* Search Form */}
+            <section className="mb-8">
+              <form onSubmit={handleSearch} className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <input
+                    type="text"
+                    placeholder="API Number"
+                    value={searchParams.api}
+                    onChange={(e) => setSearchParams({ ...searchParams, api: e.target.value })}
+                    className="p-4 bg-[#111111] border border-[#222222] rounded-xl text-white placeholder-[#555555] focus:outline-none focus:border-[#444444]"
+                  />
+                  <input
+                    type="text"
+                    placeholder="State"
+                    value={searchParams.state}
+                    onChange={(e) => setSearchParams({ ...searchParams, state: e.target.value })}
+                    className="p-4 bg-[#111111] border border-[#222222] rounded-xl text-white placeholder-[#555555] focus:outline-none focus:border-[#444444]"
+                  />
+                  <input
+                    type="text"
+                    placeholder="County"
+                    value={searchParams.county}
+                    onChange={(e) => setSearchParams({ ...searchParams, county: e.target.value })}
+                    className="p-4 bg-[#111111] border border-[#222222] rounded-xl text-white placeholder-[#555555] focus:outline-none focus:border-[#444444]"
+                  />
+                </div>
+                <button type="submit" className="px-6 py-3 bg-[#222222] text-white rounded-xl hover:bg-[#333333] transition-colors">
+                  Search Wells
+                </button>
+              </form>
+            </section>
+
+            {/* Results Placeholder */}
+            <section className="mb-8">
+              <h2 className="text-lg font-medium text-white mb-3">Results</h2>
+              <div className="p-8 text-center bg-[#111111] border border-[#222222] rounded-xl">
+                <p className="text-[#555555]">Search for wells to see results</p>
+              </div>
+            </section>
+
+            <footer className="pt-6 border-t border-[#222222]">
+              <div className="flex items-center justify-between text-sm text-[#444444]">
+                <span>Carbon Cut Solutions</span>
+                <a href="/settings" className="hover:text-white">Settings</a>
+              </div>
+            </footer>
+          </div>
+        </main>
       </div>
     </>
   )

@@ -3,217 +3,166 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 export default function Todo() {
-  const [tasks, setTasks] = useState({
-    'To Do': [
-      { id: 1, title: 'Finalize grant applications', tag: 'grant' },
-      { id: 2, title: 'Contact state regulators', tag: 'compliance' },
-      { id: 3, title: 'Review well cost estimates', tag: 'planning' },
-    ],
-    'Working On': [
-      { id: 4, title: 'Methane tracker design', tag: 'tool' },
-      { id: 5, title: 'Update expense categories', tag: 'admin' },
-    ],
-    'Complete': [
-      { id: 6, title: 'Well cost calculator', tag: 'tool', completed: true },
-      { id: 7, title: 'Annual expenses sheet', tag: 'finance', completed: true },
-      { id: 8, title: 'Navigation toolbar', tag: 'ui', completed: true },
-    ],
-    'Future Ideas': [
-      { id: 9, title: 'AI-powered well identification', tag: 'ai' },
-      { id: 10, title: 'Automated report generation', tag: 'automation' },
-      { id: 11, title: 'Mobile app version', tag: 'mobile' },
-      { id: 12, title: 'Partner portal', tag: 'feature' },
-    ],
-  })
+  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [tasks, setTasks] = useState([
+    { id: 1, title: 'Research orphan well databases', status: 'todo', priority: 'high' },
+    { id: 2, title: 'Contact state environmental agency', status: 'todo', priority: 'medium' },
+    { id: 3, title: 'Review cost estimation formulas', status: 'todo', priority: 'low' },
+    { id: 4, title: 'Set up project timeline', status: 'doing', priority: 'medium' },
+  ])
 
-  const [newTask, setNewTask] = useState('')
-  const [newCategory, setNewCategory] = useState('To Do')
-  const [draggedTask, setDraggedTask] = useState(null)
+  const navItems = [
+    { id: 'dashboard', name: 'Dashboard', href: '/' },
+    { id: 'analyzer', name: 'Well Analyzer', href: '/orphan-well' },
+    { id: 'cost', name: 'Well Cost Calculator', href: '/well-cost' },
+    { id: 'expenses', name: 'Annual Expenses', href: '/expenses' },
+    { id: 'todo', name: 'To-Do List', href: '/todo' },
+    { id: 'settings', name: 'Settings', href: '/settings' },
+  ]
 
-  const categories = ['To Do', 'Working On', 'Complete', 'Future Ideas']
-
-  const addTask = () => {
-    if (!newTask.trim()) return
-    const task = {
-      id: Date.now(),
-      title: newTask,
-      tag: 'general'
-    }
-    setTasks({
-      ...tasks,
-      [newCategory]: [...tasks[newCategory], task]
-    })
-    setNewTask('')
-  }
-
-  const deleteTask = (category, taskId) => {
-    setTasks({
-      ...tasks,
-      [category]: tasks[category].filter(t => t.id !== taskId)
-    })
-  }
-
-  const toggleComplete = (category, taskId) => {
-    setTasks({
-      ...tasks,
-      [category]: tasks[category].map(t => 
-        t.id === taskId ? { ...t, completed: !t.completed } : t
-      )
-    })
-  }
-
-  const handleDragStart = (e, task, fromCategory) => {
-    setDraggedTask({ task, fromCategory })
-    e.dataTransfer.effectAllowed = 'move'
-  }
-
-  const handleDragOver = (e) => {
-    e.preventDefault()
-  }
-
-  const handleDrop = (e, toCategory) => {
-    e.preventDefault()
-    if (!draggedTask) return
-    
-    const { task, fromCategory } = draggedTask
-    if (fromCategory === toCategory) return
-    
-    const newFromList = tasks[fromCategory].filter(t => t.id !== task.id)
-    const newToList = [...tasks[toCategory], task]
-    
-    setTasks({
-      ...tasks,
-      [fromCategory]: newFromList,
-      [toCategory]: newToList
-    })
-    setDraggedTask(null)
-  }
-
-  const getTagColor = (tag) => {
-    const colors = {
-      'tool': 'bg-blue-900 text-blue-300',
-      'grant': 'bg-green-900 text-green-300',
-      'compliance': 'bg-red-900 text-red-300',
-      'planning': 'bg-yellow-900 text-yellow-300',
-      'finance': 'bg-purple-900 text-purple-300',
-      'admin': 'bg-slate-700 text-slate-300',
-      'ai': 'bg-indigo-900 text-indigo-300',
-      'automation': 'bg-cyan-900 text-cyan-300',
-      'mobile': 'bg-pink-900 text-pink-300',
-      'feature': 'bg-orange-900 text-orange-300',
-      'ui': 'bg-teal-900 text-teal-300',
-      'general': 'bg-slate-700 text-slate-400',
-    }
-    return colors[tag] || colors['general']
-  }
+  const todoTasks = tasks.filter(t => t.status === 'todo')
+  const doingTasks = tasks.filter(t => t.status === 'doing')
+  const doneTasks = tasks.filter(t => t.status === 'done')
 
   return (
     <>
       <Head>
         <title>To-Do List | Carbon Cut Solutions</title>
+        <meta name="description" content="Task management and project planning" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="min-h-screen bg-slate-900 p-4 md:p-8">
-        <a href="/" className="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Back to Dashboard</a>
-        
-        <h1 className="text-3xl md:text-4xl font-bold mb-2">To-Do List</h1>
-        <p className="text-slate-400 mb-8">Carbon Cut Solutions - Task Management</p>
+      <div className="min-h-screen bg-[#0a0a0a] text-white font-sans">
+        {/* Oil Derrick Background */}
+        <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-0">
+          <svg className="w-full h-full max-w-4xl max-h-[800px] opacity-[0.08] absolute" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="oilGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="white" stopOpacity="0.6"/>
+                <stop offset="100%" stopColor="white" stopOpacity="0"/>
+              </linearGradient>
+            </defs>
+            <g transform="translate(100, 75)">
+              <path d="M-8,60 L-4,10 L-2,10 L-2,0 L2,0 L2,10 L4,10 L8,60 Z" fill="url(#oilGrad)"/>
+              <rect x="-15" y="-8" width="30" height="6" rx="1" fill="url(#oilGrad)"/>
+              <line x1="-4" y1="30" x2="4" y2="30" stroke="url(#oilGrad)" strokeWidth="1"/>
+              <line x1="-6" y1="45" x2="6" y2="45" stroke="url(#oilGrad)" strokeWidth="1"/>
+              <line x1="-4" y1="20" x2="4" y2="20" stroke="url(#oilGrad)" strokeWidth="1"/>
+              <rect x="-20" y="60" width="40" height="10" rx="2" fill="url(#oilGrad)"/>
+            </g>
+          </svg>
+        </div>
 
-        {/* Add New Task */}
-        <div className="card mb-8">
-          <h2 className="text-xl font-semibold mb-4">Add New Task</h2>
-          <div className="flex flex-col md:flex-row gap-4">
-            <input
-              type="text"
-              value={newTask}
-              onChange={(e) => setNewTask(e.target.value)}
-              placeholder="Enter task..."
-              className="flex-1 bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white"
-              onKeyPress={(e) => e.key === 'Enter' && addTask()}
-            />
-            <select
-              value={newCategory}
-              onChange={(e) => setNewCategory(e.target.value)}
-              className="bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white"
-            >
-              {categories.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
+        {/* Mobile Header */}
+        <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-[#111111] border-b border-[#222222] flex items-center justify-between px-4 z-50">
+          <span className="text-lg">Carbon Cut</span>
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-white">
+            {mobileMenuOpen ? '✕' : '☰'}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden fixed inset-0 bg-[#0a0a0a] z-40 pt-14 p-4">
+            <nav className="space-y-2">
+              {navItems.map((item) => (
+                <a key={item.id} href={item.href} className="block p-4 bg-[#111111] rounded-lg text-white" onClick={() => setMobileMenuOpen(false)}>
+                  {item.name}
+                </a>
               ))}
-            </select>
-            <button onClick={addTask} className="btn btn-primary">
-              Add Task
-            </button>
+            </nav>
           </div>
-        </div>
+        )}
 
-        {/* Kanban Board */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {categories.map(category => (
-            <div
-              key={category}
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleDrop(e, category)}
-              className="bg-slate-800 rounded-xl p-4 min-h-[300px]"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-lg">{category}</h3>
-                <span className="text-slate-400 text-sm">{tasks[category].length}</span>
+        {/* Sidebar */}
+        <aside className={`hidden md:block fixed left-0 top-0 h-full bg-[#111111] border-r border-[#222222] transition-all duration-300 z-40 ${sidebarOpen ? 'w-56' : 'w-14'}`}>
+          <div className="h-14 flex items-center px-4 border-b border-[#222222]">
+            <span className="text-xl">🛢️</span>
+            {sidebarOpen && <span className="ml-2 font-medium">Carbon Cut</span>}
+          </div>
+          <nav className="p-2 space-y-1">
+            {navItems.map((item) => (
+              <a key={item.id} href={item.href} className={`flex items-center px-3 py-2.5 rounded-lg text-sm transition-all ${item.id === 'todo' ? 'text-white bg-[#1a1a1a]' : 'text-[#888888] hover:text-white hover:bg-[#1a1a1a]'}`}>
+                <span className="w-5">{item.id === 'todo' ? '●' : '○'}</span>
+                {sidebarOpen && <span className="ml-2">{item.name}</span>}
+              </a>
+            ))}
+          </nav>
+          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-[#1a1a1a] rounded text-[#666666] hover:text-white">
+            {sidebarOpen ? '◀' : '▶'}
+          </button>
+        </aside>
+
+        {/* Main Content */}
+        <main className={`md:transition-all md:duration-300 relative z-10 ${sidebarOpen ? 'md:ml-56' : 'md:ml-14'}`}>
+          <div className="pt-16 md:pt-0 max-w-5xl mx-auto px-4 md:px-8 py-8">
+            <header className="mb-8 flex justify-between items-center">
+              <div>
+                <h1 className="text-2xl md:text-3xl font-semibold text-white mb-1">To-Do List</h1>
+                <p className="text-[#666666]">Task management and project planning</p>
               </div>
-              
-              <div className="space-y-2">
-                {tasks[category].map(task => (
-                  <div
-                    key={task.id}
-                    draggable
-                    onDragStart={(e) => handleDragStart(e, task, category)}
-                    className={`p-3 bg-slate-700 rounded-lg cursor-move hover:bg-slate-600 transition-colors ${
-                      task.completed ? 'opacity-50' : ''
-                    }`}
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="flex-1">
-                        <p className={`text-sm ${task.completed ? 'line-through text-slate-500' : 'text-white'}`}>
-                          {task.title}
-                        </p>
-                        <span className={`text-xs px-2 py-0.5 rounded mt-1 inline-block ${getTagColor(task.tag)}`}>
-                          {task.tag}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        {category !== 'Complete' && (
-                          <button
-                            onClick={() => toggleComplete(category, task.id)}
-                            className="text-slate-400 hover:text-green-400"
-                          >
-                            ✓
-                          </button>
-                        )}
-                        <button
-                          onClick={() => deleteTask(category, task.id)}
-                          className="text-slate-400 hover:text-red-400"
-                        >
-                          ✕
-                        </button>
-                      </div>
+              <button className="px-4 py-2 bg-[#222222] text-white rounded-lg hover:bg-[#333333]">
+                + Add Task
+              </button>
+            </header>
+
+            {/* Kanban Board */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              {/* To Do */}
+              <section>
+                <h2 className="text-lg font-medium text-white mb-3">To Do ({todoTasks.length})</h2>
+                <div className="space-y-2">
+                  {todoTasks.map((task) => (
+                    <div key={task.id} className="p-4 bg-[#111111] border border-[#222222] rounded-xl">
+                      <p className="text-white mb-2">{task.title}</p>
+                      <span className={`text-xs px-2 py-1 rounded ${task.priority === 'high' ? 'bg-red-900/30 text-red-400' : task.priority === 'medium' ? 'bg-yellow-900/30 text-yellow-400' : 'bg-green-900/30 text-green-400'}`}>
+                        {task.priority}
+                      </span>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+                  ))}
+                </div>
+              </section>
 
-        {/* Instructions */}
-        <div className="card mt-8">
-          <h2 className="text-xl font-semibold mb-4">How to Use</h2>
-          <ul className="text-slate-400 text-sm space-y-2">
-            <li>Add tasks: Type a task name and select a column, then click "Add Task"</li>
-            <li>Move tasks: Drag and drop tasks between columns</li>
-            <li>Complete tasks: Click the checkmark to mark as complete</li>
-            <li>Delete tasks: Click the X to remove a task</li>
-            <li>Tag system: Use tags like 'tool', 'grant', 'compliance' for organization</li>
-          </ul>
-        </div>
+              {/* Doing */}
+              <section>
+                <h2 className="text-lg font-medium text-white mb-3">Doing ({doingTasks.length})</h2>
+                <div className="space-y-2">
+                  {doingTasks.map((task) => (
+                    <div key={task.id} className="p-4 bg-[#111111] border border-[#222222] rounded-xl">
+                      <p className="text-white mb-2">{task.title}</p>
+                      <span className={`text-xs px-2 py-1 rounded ${task.priority === 'high' ? 'bg-red-900/30 text-red-400' : task.priority === 'medium' ? 'bg-yellow-900/30 text-yellow-400' : 'bg-green-900/30 text-green-400'}`}>
+                        {task.priority}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* Done */}
+              <section>
+                <h2 className="text-lg font-medium text-white mb-3">Done ({doneTasks.length})</h2>
+                <div className="space-y-2">
+                  {doneTasks.map((task) => (
+                    <div key={task.id} className="p-4 bg-[#111111] border border-[#222222] rounded-xl opacity-50">
+                      <p className="text-white mb-2 line-through">{task.title}</p>
+                      <span className="text-xs px-2 py-1 rounded bg-[#333333] text-[#888888]">
+                        {task.priority}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </div>
+
+            <footer className="pt-6 border-t border-[#222222]">
+              <div className="flex items-center justify-between text-sm text-[#444444]">
+                <span>Carbon Cut Solutions</span>
+                <a href="/settings" className="hover:text-white">Settings</a>
+              </div>
+            </footer>
+          </div>
+        </main>
       </div>
     </>
   )
