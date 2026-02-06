@@ -13,6 +13,7 @@ export default function Home() {
       { name: '💰 Annual Expenses', href: '/expenses', desc: 'Budget tracking' },
     ],
     'Planning': [
+      { name: '📋 To-Do List', href: '/todo', desc: 'Task management' },
       { name: '📋 Project Templates', href: '/templates', desc: 'Coming soon' },
       { name: '📊 Cost Analysis', href: '/analysis', desc: 'Coming soon' },
     ],
