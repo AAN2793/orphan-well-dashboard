@@ -8,20 +8,28 @@ export default function Home() {
 
   const navItems = {
     'Tools': [
-      { name: '🔍 Well Analyzer', href: '/orphan-well', desc: 'Look up orphan wells' },
-      { name: '🏗️ Well Cost Calculator', href: '/well-cost', desc: 'Cost estimates' },
-      { name: '💰 Annual Expenses', href: '/expenses', desc: 'Budget tracking' },
+      { name: 'Well Analyzer', href: '/orphan-well', desc: 'Look up orphan wells' },
+      { name: 'Well Cost Calculator', href: '/well-cost', desc: 'Cost estimates by complexity' },
+      { name: 'Annual Expenses', href: '/expenses', desc: 'Budget & expense tracking' },
     ],
     'Planning': [
-      { name: '📋 To-Do List', href: '/todo', desc: 'Task management' },
-      { name: '📋 Project Templates', href: '/templates', desc: 'Coming soon' },
-      { name: '📊 Cost Analysis', href: '/analysis', desc: 'Coming soon' },
+      { name: 'To-Do List', href: '/todo', desc: 'Task management' },
+      { name: 'Project Templates', href: '/templates', desc: 'Coming soon' },
+      { name: 'Cost Analysis', href: '/analysis', desc: 'Coming soon' },
     ],
     'Resources': [
-      { name: '📁 Documents', href: '/documents', desc: 'Coming soon' },
-      { name: '🔗 External Links', href: '/links', desc: 'Coming soon' },
+      { name: 'Documents', href: '/documents', desc: 'Coming soon' },
+      { name: 'External Links', href: '/links', desc: 'Coming soon' },
     ],
   }
+
+  const quickLinks = [
+    { name: 'Well Analyzer', href: '/orphan-well' },
+    { name: 'Well Cost Calculator', href: '/well-cost' },
+    { name: 'Annual Expenses', href: '/expenses' },
+    { name: 'To-Do List', href: '/todo' },
+    { name: 'Settings', href: '/settings' },
+  ]
 
   return (
     <>
@@ -64,7 +72,7 @@ export default function Home() {
               </div>
             ))}
             <a href="/settings" className="block py-2 px-2 text-white bg-slate-700 rounded">
-              ⚙️ Settings
+              Settings
             </a>
           </div>
         )}
@@ -85,7 +93,7 @@ export default function Home() {
                     onMouseEnter={() => setDropdown(label)}
                     onMouseLeave={() => setDropdown(null)}
                   >
-                    <button className="px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700 rounded-lg transition-colors">
+                    <button className="px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700 rounded-lg transition-colors text-sm">
                       {label} ▾
                     </button>
                     {dropdown === label && (
@@ -113,60 +121,43 @@ export default function Home() {
         <main className="max-w-7xl mx-auto p-4 md:p-8">
           {/* Header */}
           <header className="mb-6 md:mb-8">
-            <h1 className="text-2xl md:text-4xl font-bold mb-2">🛢️ Orphan Well Analysis Tool</h1>
-            <p className="text-slate-400 text-sm md:text-base">Carbon Cut Solutions - Well Planning & Cost Management</p>
+            <h1 className="text-2xl md:text-4xl font-bold mb-2">Carbon Cut Solutions</h1>
+            <p className="text-slate-400 text-sm md:text-base">Orphan Well Analysis Tool</p>
           </header>
 
-          {/* Quick Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-6 md:mb-8">
-            {[
-              { label: 'Active Tools', value: '3', color: 'blue' },
-              { label: 'Calculators', value: '1', color: 'green' },
-              { label: 'Budget', value: '$640K', color: 'yellow' },
-              { label: 'Complexity', value: '3', color: 'purple' },
-            ].map((stat, idx) => (
-              <div key={idx} className="card text-center">
-                <p className="text-slate-400 text-xs md:text-sm">{stat.label}</p>
-                <p className={`text-xl md:text-2xl font-bold text-${stat.color}-400`}>{stat.value}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Tools Grid */}
-          <h2 className="text-lg md:text-2xl font-bold mb-4">🛠️ Available Tools</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
-            {[
-              { href: '/orphan-well', icon: '🔍', title: 'Well Analyzer', desc: 'Look up orphan wells' },
-              { href: '/well-cost', icon: '🏗️', title: 'Well Cost Calculator', desc: 'Cost estimates by complexity' },
-              { href: '/expenses', icon: '💰', title: 'Annual Expenses', desc: 'Budget & expense tracking' },
-            ].map((tool, idx) => (
-              <a key={idx} href={tool.href} className="card hover:border-blue-500/50 transition-all">
-                <div className="text-3xl mb-2">{tool.icon}</div>
-                <h3 className="text-lg font-semibold mb-1">{tool.title}</h3>
-                <p className="text-slate-400 text-sm">{tool.desc}</p>
+          {/* Quick Links */}
+          <h2 className="text-lg md:text-xl font-bold mb-4">Quick Links</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mb-8">
+            {quickLinks.map((link, idx) => (
+              <a
+                key={idx}
+                href={link.href}
+                className="card hover:bg-slate-700 transition-all group"
+              >
+                <span className="text-lg group-hover:text-blue-400 transition-colors">
+                  {link.name} →
+                </span>
               </a>
             ))}
           </div>
 
           {/* Coming Soon */}
-          <h2 className="text-lg md:text-2xl font-bold mb-4">🔜 Coming Soon</h2>
+          <h2 className="text-lg md:text-xl font-bold mb-4">Coming Soon</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6">
-            {[
-              { icon: '💰', title: 'Grant Finder', desc: 'Government grants' },
-              { icon: '🌡️', title: 'Methane Tracker', desc: 'Emission monitoring' },
-              { icon: '📋', title: 'Compliance Check', desc: 'Regulatory compliance' },
-            ].map((item, idx) => (
-              <div key={idx} className="card opacity-60">
-                <div className="text-3xl mb-2">{item.icon}</div>
-                <h3 className="text-lg font-semibold mb-1">{item.title}</h3>
-                <p className="text-slate-400 text-sm">{item.desc}</p>
-              </div>
-            ))}
+            <div className="card opacity-60">
+              <span className="text-slate-400">Project Templates</span>
+            </div>
+            <div className="card opacity-60">
+              <span className="text-slate-400">Cost Analysis</span>
+            </div>
+            <div className="card opacity-60">
+              <span className="text-slate-400">Documents</span>
+            </div>
           </div>
 
           {/* Settings */}
           <div className="flex justify-end">
-            <a href="/settings" className="text-slate-400 hover:text-white text-sm">⚙️ Settings →</a>
+            <a href="/settings" className="text-slate-400 hover:text-white text-sm">Settings →</a>
           </div>
         </main>
       </div>

@@ -78,9 +78,7 @@ export default function Todo() {
     const { task, fromCategory } = draggedTask
     if (fromCategory === toCategory) return
     
-    // Remove from old category
     const newFromList = tasks[fromCategory].filter(t => t.id !== task.id)
-    // Add to new category
     const newToList = [...tasks[toCategory], task]
     
     setTasks({
@@ -118,12 +116,12 @@ export default function Todo() {
       <div className="min-h-screen bg-slate-900 p-4 md:p-8">
         <a href="/" className="text-blue-400 hover:text-blue-300 mb-4 inline-block">← Back to Dashboard</a>
         
-        <h1 className="text-3xl md:text-4xl font-bold mb-2">📋 To-Do List</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-2">To-Do List</h1>
         <p className="text-slate-400 mb-8">Carbon Cut Solutions - Task Management</p>
 
         {/* Add New Task */}
         <div className="card mb-8">
-          <h2 className="text-xl font-semibold mb-4">➕ Add New Task</h2>
+          <h2 className="text-xl font-semibold mb-4">Add New Task</h2>
           <div className="flex flex-col md:flex-row gap-4">
             <input
               type="text"
@@ -207,13 +205,13 @@ export default function Todo() {
 
         {/* Instructions */}
         <div className="card mt-8">
-          <h2 className="text-xl font-semibold mb-4">📝 How to Use</h2>
+          <h2 className="text-xl font-semibold mb-4">How to Use</h2>
           <ul className="text-slate-400 text-sm space-y-2">
-            <li>• <strong>Add tasks:</strong> Type a task name and select a column, then click "Add Task"</li>
-            <li>• <strong>Move tasks:</strong> Drag and drop tasks between columns</li>
-            <li>• <strong>Complete tasks:</strong> Click the checkmark to mark as complete</li>
-            <li>• <strong>Delete tasks:</strong> Click the X to remove a task</li>
-            <li>• <strong>Tag system:</strong> Use tags like 'tool', 'grant', 'compliance' for organization</li>
+            <li>Add tasks: Type a task name and select a column, then click "Add Task"</li>
+            <li>Move tasks: Drag and drop tasks between columns</li>
+            <li>Complete tasks: Click the checkmark to mark as complete</li>
+            <li>Delete tasks: Click the X to remove a task</li>
+            <li>Tag system: Use tags like 'tool', 'grant', 'compliance' for organization</li>
           </ul>
         </div>
       </div>
