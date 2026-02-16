@@ -1,0 +1,10 @@
+Contract_ID,Project_Name,County,State,Wells_Count,Total_Bid_Amount,Per_Well_Cost,Year,Company,Winning_Bid_Rank,Competition_Count,Well_Depth_Avg_ft,Well_Depth_Max_ft,Well_Type,Pressure_PSI,Contamination_Level,Methane_Detected,Water_Table_Distance_ft,Access_Difficulty,Terrain_Type,Plugging_Method,Cement_Required_bbls,Completion_Days,Contractor_Experience_Rating,Notes,Source
+OH-2024-001,Independence Township,Monroe,OH,16,2089397.94,130587.37,2024,Monroe Drilling,1,,,,"Oil","Yes","High","Yes",500,"Moderate","Hilly","Conventional",,,,"16 wells - low bid",Marietta Times
+OH-2024-002,Morrow 8,Morrow,OH,4,522233.00,87038.83,2024,Plants & Goodwin,1,,3569,,,"Yes","High","Yes",,"Moderate","Flat","Conventional",,,,"4 wells + 2 excavated",GlobeNewswire
+OH-2024-003,Belmont County,Belmont,OH,1,420784.00,420784.00,2024,Plants & Goodwin,1,,,,,"Yes",,,,"Conventional",,,,"Single deep well",StockTitan
+OH-2025-001,Ashtabula County,Ashtabula,OH,10,,,2025,Plants & Goodwin,1,,,,,"Yes",,,,,,"10 well sites",Zefiro News
+OH-2025-002,State-Funded Package,Multiple,OH,50,,,2025,Plants & Goodwin,1,,,,,,"Yes",,,,,,"50 wells - 28 plugged",Zefiro News
+OH-2023-001,Traditional Program Aggregate,Multiple,OH,346,36808068.29,106400.20,2023,Various,Multiple,,"Varies","Varies","Oil/Gas","Mixed","Mixed","Yes","Varies","Various","Various","Conventional","Varies",,,346 wells total,Ohio ODNR
+OH-2024-004,Federal Program Aggregate,Multiple,OH,126,10636182.32,84350.65,2024,Various,Multiple,,,,"Oil/Gas","Mixed","Mixed","Yes",,"Various","Various","Conventional","Varies",,,126 wells - Federal,Ohio ODNR
+OH-2024-LAKE14,Lake #14,Lake,OH,14,,,2024,TBD,Pending,,,,,"Yes","Moderate","Yes",500,"Moderate","Flat","Conventional",,,,"Scope: 500ft plug 1800-1300ft",Ohio ODNR
+OH-2024-DEL3,Delaware #3,Delaware,OH,,,,"2024",TBD,Pending,,3569,,"Yes","High","Yes",,"Moderate","Hilly","Conventional",,,,"TD 3569 ft - well control required",Ohio ODNR
